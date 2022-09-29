@@ -1,0 +1,18 @@
+.no-bg{
+    background: 0;
+    border: 0;
+}
+.table-bordered>:not(caption)>*>* {
+    border-width: 0;
+}
+tr:not(:first-child):hover{
+    background-color: #eee;
+}
+.nestWorker{
+    border: none !important;
+    border-bottom-width: 1px;
+    td{
+        border: none;
+        padding-top: 0
+    }
+}

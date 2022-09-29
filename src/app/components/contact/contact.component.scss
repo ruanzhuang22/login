@@ -1,0 +1,39 @@
+table{
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.table-bordered>:not(caption)>*>* {
+    border-width: 0;
+}
+
+.table th, .table td {
+    padding: 0.5rem;
+    border-top: none;
+}
+
+.main-content {
+    width: 100%;
+    padding: 25px;
+    min-height: calc(100vh - (46px + 28px));
+}
+
+tr:not(:first-child):hover{
+    background-color: #eee;
+}
+
+.infor-detail{
+    .address{
+        min-width: 258px;
+        word-wrap: break-word;
+    }
+}
+
+.nest{
+    border: none !important;
+    border-bottom-width: 1px;
+    td{
+        border: none;
+    }
+}

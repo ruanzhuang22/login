@@ -1,0 +1,142 @@
+<div class="modal fade" id="noteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Notes for ({{id}})</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <button class="no-bg" (click)="add()">
+          <i class="fa-solid fa-plus"></i>
+          <span class="ms-1">Add</span>
+        </button>
+          <table class="table table-bordered mt-3">
+            <tr>
+              <th *ngFor="let item of listTitle">{{item}}</th>
+            </tr>
+            <tr *ngFor="let item of listNote">
+              <td>{{item.NoteDate  | customDate}}</td>
+              <td>{{item.NoteCategory}}</td>
+              <td>{{item.Note}}</td>
+              <td>
+                <tr *ngFor="let result of itemWorker" class="nestWorker">
+                  <td *ngIf="item.UpdatedById == result.Id">
+                    {{result.UserId}}
+                  </td>
+                </tr>
+              </td>
+              <td>{{item.UpdatedDate | customDate}}</td>
+              <td class="d-flex">
+                <button (click)="edit(item.Id)">
+                  <i class="fa-solid fa-pencil"></i>
+                  <span class="ms-1">Edit</span>
+                </button>
+                <button (click)="delete(item.Id)">
+                  <i class="fa-solid fa-trash"></i>
+                  <span class="ms-1">Delete</span>
+                </button>
+              </td>
+            </tr>
+          </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- modal edit -->
+<div class="modal" id="add" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel1">Add Note</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formNote" (ngSubmit)="submit(false)" >
+          <div class="row">
+            <div class="form-group col-md-7">
+              <label for="noteDate">Note Date</label>
+              <input type="text" class="form-control ng-untouched ng-pristine ng-valid"  id="noteDate" formControlName="noteDate" disabled>
+            </div>
+            <div class="form-group col-md-5">
+                <label for="cateNote">Note Category</label>
+                <select class="form-select" aria-label="Default select example" id="cateNote" formControlName="NoteCategory">
+                    <option *ngFor="let item of categoryNote" [value]="item.NoteCategory">{{item.NoteCategory}}</option>
+                </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group">
+              <label for="note">Note</label>
+              <textarea type="text" class="form-control ng-untouched ng-pristine ng-valid"  id="note" formControlName="Note" rows="4"></textarea>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-4">
+              <label for="updateBy">Updated By</label>
+              <input type="text" class="form-control ng-untouched ng-pristine ng-valid"  id="updateBy" formControlName="UpdateBy" disabled>
+            </div>
+            <div class="form-group col-md-8">
+              <label for="updateOn">On</label>
+              <input type="text" class="form-control ng-untouched ng-pristine ng-valid"  id="updateOn" formControlName="UpdateOn" disabled>
+            </div>
+          </div>
+          <div class="btn-form d-flex justify-content-end">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="backNoteList(true)">Back</button>
+            <button type="submit" class="btn btn-primary ms-2">Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="edit" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel1">Edit Note</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formNote" (ngSubmit)="submit(true)" >
+          <div class="row">
+            <div class="form-group col-md-7">
+              <label for="noteDate">Note Date</label>
+              <input type="text" class="form-control ng-untouched ng-pristine ng-valid"  id="noteDate" formControlName="noteDate" disabled>
+            </div>
+            <div class="form-group col-md-5">
+                <label for="cateNote">Note Category</label>
+                <select class="form-select" aria-label="Default select example" id="cateNote" formControlName="NoteCategory">
+                    <option *ngFor="let item of categoryNote" [value]="item.NoteCategory">{{item.NoteCategory}}</option>
+                </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group">
+              <label for="note">Note</label>
+              <textarea type="text" class="form-control ng-untouched ng-pristine ng-valid"  id="note" formControlName="Note" rows="4"></textarea>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-4">
+              <label for="updateBy">Updated By</label>
+              <input type="text" class="form-control ng-untouched ng-pristine ng-valid"  id="updateBy" formControlName="UpdateBy" disabled>
+            </div>
+            <div class="form-group col-md-8">
+              <label for="updateOn">On</label>
+              <input type="text" class="form-control ng-untouched ng-pristine ng-valid"  id="updateOn" formControlName="UpdateOn" disabled>
+            </div>
+          </div>
+          <div class="btn-form d-flex justify-content-end">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="backNoteList(true)">Back</button>
+            <button type="submit" class="btn btn-primary ms-2">Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+

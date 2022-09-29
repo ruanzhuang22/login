@@ -1,0 +1,28 @@
+<router-outlet></router-outlet>
+<div class="container">
+  <h2 class="title-login">Đăng nhập</h2>
+  <form class="loginForm" (ngSubmit)="login()" [formGroup]="formLogin" novalidate>
+    <div class="alert alert-danger" role="alert" *ngIf="isShowError">
+      {{messageError}}
+    </div>
+    <!-- Email input -->
+    <div class="form-outline has-validation mb-4">
+      <label class="form-label" for="email">Email</label>
+      <input type="text" class="form-control" formControlName="userName" placeholder="Email/Số điện thoại" [class]="formLogin.controls['userName'].invalid && (formLogin.controls['userName'].touched && formLogin.controls['userName'].untouched || submitted) ? 'form-control is-invalid' : 'form-control'"/>
+      <div class="invalid-feedback">
+        Trường 'Email/Số điện thoại' là trường bắt buộc.
+      </div>
+    </div>
+    <!-- Password input -->
+    <div class="form-outline mb-4">
+      <label class="form-label" for="password">Mật khẩu</label>
+      <input type="password" class="form-control" formControlName="password" placeholder="Mật khẩu" [class]="formLogin.controls['password'].invalid && (formLogin.controls['password'].touched && formLogin.controls['password'].untouched || submitted) ? 'form-control is-invalid' : 'form-control'"/>
+      <div class="invalid-feedback">
+        Trường 'Mật khẩu' là trường bắt buộc và có độ dài tối thiểu 3 ký tự.
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
+  </form>
+</div>
+
+

@@ -1,0 +1,23 @@
+<h2>Search Note</h2>
+
+<div class="main-content">
+  <table class="table">
+    <tr>
+      <th *ngFor="let item of listTitle">{{item}}</th>
+    </tr>
+    <tr *ngFor="let item of listNote">
+      <td>{{item.NoteCategory}}</td>
+      <td>{{item.Note}}</td>
+      <td>{{item.NoteDate}}</td>
+      <td *ngIf=" item.TblContact &&item.TblContact.FirstName">{{item.TblContact.FirstName}}</td>
+      <td *ngIf=" item.TblContact &&item.TblContact.LastName">{{item.TblContact.LastName}}</td>
+      <td *ngIf=" item.TblContact &&item.TblContact.Company">{{item.TblContact.Company}}</td>
+      <td *ngIf=" item.TblContact &&!item.TblContact.Company"></td>
+      <td *ngIf="item.TblContact &&item.TblContact.MailStatusCode">
+        <tr *ngFor="let result of listStatusCode">
+          <td *ngIf="item.TblContact.MailStatusCode === result.StatusCode">{{result.Status}}</td>
+        </tr>
+      </td>
+    </tr>
+  </table>
+</div>

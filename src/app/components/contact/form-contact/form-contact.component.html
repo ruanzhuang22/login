@@ -1,0 +1,87 @@
+<div class="modal fade " id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header" *ngFor="let item of itemContact">
+          <h5 class="modal-title" id="exampleModalLabel">Edit for ({{item.Id}}) {{item.FirstName}} {{item.LastName}} {{item.Company}}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form  [formGroup]="formEditContact" (ngSubmit)="onSubmit()" novalidate>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="firstName">First Name</label>
+                    <input type="text" class="form-control ng-untouched ng-pristine ng-valid"  formControlName="FirstName" id="firstName" >
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" class="form-control ng-untouched ng-pristine ng-valid"  formControlName="LastName" id="lastName">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="email">Email
+                        <span class="text-danger">*</span>
+                    </label>
+                    <input type="email" class="form-control ng-untouched ng-pristine ng-valid"  formControlName="Email" id="email">
+                    <div class="invalid-feedback">
+                        Email is required
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="phone">Phone</label>
+                    <input type="text" class="form-control ng-untouched ng-pristine ng-valid"  formControlName="Phone" id="phone" >
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="company">Company</label>
+                    <input type="text" class="form-control ng-untouched ng-pristine ng-valid"  formControlName="Company" id="company" >
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="town">Town/ City</label>
+                    <input type="text" class="form-control ng-untouched ng-pristine ng-valid"  formControlName="Town" id="town">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="address">Address</label>
+                    <input type="text" class="form-control ng-untouched ng-pristine ng-valid"  formControlName="Address" id="address">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="postalCode">Postal Code</label>
+                    <input type="text" class="form-control ng-untouched ng-pristine ng-valid"  formControlName="PostalCode" id="postalCode">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-3">
+                    <label for="country">Country</label>
+                    <select class="form-select" aria-label="Default select example" id="country" formControlName="Country">
+                        <option *ngFor="let item of country" [value]="item.Id">{{item.County}}</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="zone">Zone</label>
+                    <input type="text" class="form-control ng-untouched ng-pristine ng-valid"  formControlName="Zone" id="zone" disabled>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="emailStatus">Email Status</label>
+                    <select class="form-select" aria-label="Default select example" id="emailStatus" formControlName="eStatus">
+                        <option *ngFor="let item of emailStatus" [value]="item.Id">{{item.EMailStatus}}</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="Status">Status</label>
+                    <select class="form-select" aria-label="Default select example" id="Status" formControlName="Status">
+                        <option *ngFor="let item of statusCode" [value]="item.StatusCode">{{item.Status}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="btn-form d-flex justify-content-end">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary ms-2">Save changes</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

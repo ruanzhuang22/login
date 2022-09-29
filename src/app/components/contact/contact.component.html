@@ -1,0 +1,39 @@
+<h2 class="ms-5">Contact Table</h2>
+
+<div class="main-content">
+  <table class="table table-bordered">
+    <tr>
+      <th *ngFor="let item of listTitle">{{item}}</th>
+    </tr>
+    <tr  (click)="openNote(item.Id)" *ngFor="let item of listContact | paginate: { itemsPerPage: 10, currentPage: currentPage, totalItems: pageCount }" class="infor-detail edit"> 
+      <td>{{item.Id}}</td>
+      <td>{{item.FirstName}}</td>
+      <td>{{item.LastName}}</td>
+      <td>{{item.Company}}</td>
+      <td class="address">{{item.Address1}}</td>
+      <td>{{item.Town}}</td>
+      <td>{{item.Province}}</td>
+      <td>{{item.PostalCode}}</td>
+      <td>{{item.NewZone}}</td>
+      <td>
+        <tr *ngFor="let result of country" class="nest">
+          <td *ngIf="item.CountyId == result.Id">
+            {{result.County}}
+          </td>
+        </tr>
+      </td>
+      <td>{{item.Phone}}</td>
+      <td>{{item.Email}}</td>
+      <td>
+        <button (click)="edit(item.Id, $event)">
+          <i class="fa-solid fa-pen-to-square"></i>
+        </button>
+      </td>
+    </tr>
+  </table>
+  <pagination-controls (pageChange)="pageChangeNumber($event)"></pagination-controls>  
+
+
+  <app-form-contact [item]="IdContact" *ngIf="IdContact" (success)="onSave($event)" ></app-form-contact>
+  <app-form-note [item]="IdContactNote" *ngIf="IdContactNote" ></app-form-note>
+</div>
