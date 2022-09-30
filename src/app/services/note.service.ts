@@ -49,7 +49,7 @@ export class NoteService extends BaseService{
   }
 
   getAllNote(){
-    let url = `/TblContactNotes?$expand=TblContact($select=Id,FirstName,LastName,Company,MailStatusCode)&$OrderBy=Id desc`;
+    let url = `/TblContactNotes?$expand=TblContact($select=Id,FirstName,LastName,Company,StatusCode)&$OrderBy=Id desc`;
     return super.get(url).pipe(
       catchError(err => throwError(err)),
       map((res) => {
@@ -108,4 +108,14 @@ export class NoteService extends BaseService{
       catchError(err => throwError(err)),
       map((res) => this.jsonConvert.deserialize(res, ModelHelper.getClass('TblContactNotes'))));
   }
+
+  selectedRows = []; 
+  rowSelectedHandler(rowData:{isSelected:boolean, data:any}){
+    if(rowData.isSelected === false){      /*remove row*/      
+      this.selectedRows = this.selectedRows.filter((rowItem)=>rowItem .id !== rowData.data.id)    
+    }
+    else {      /*add row*/      
+      this.selectedRows = [...this.selectedRows, ...rowData.data];      console.log('added rowdata');    
+    }  
+  } 
 }

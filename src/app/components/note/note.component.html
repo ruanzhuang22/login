@@ -1,7 +1,7 @@
 <h2>Search Note</h2>
 
 <div class="main-content">
-  <table class="table">
+  <table class="table table-bordered">
     <tr>
       <th *ngFor="let item of listTitle">{{item}}</th>
     </tr>
@@ -9,15 +9,20 @@
       <td>{{item.NoteCategory}}</td>
       <td>{{item.Note}}</td>
       <td>{{item.NoteDate}}</td>
-      <td *ngIf=" item.TblContact &&item.TblContact.FirstName">{{item.TblContact.FirstName}}</td>
-      <td *ngIf=" item.TblContact &&item.TblContact.LastName">{{item.TblContact.LastName}}</td>
-      <td *ngIf=" item.TblContact &&item.TblContact.Company">{{item.TblContact.Company}}</td>
-      <td *ngIf=" item.TblContact &&!item.TblContact.Company"></td>
-      <td *ngIf="item.TblContact &&item.TblContact.MailStatusCode">
+      <td *ngIf=" item.TblContact &&item.TblContact.FirstName; else checknull">{{item.TblContact.FirstName}}</td>
+      <td *ngIf=" item.TblContact &&item.TblContact.LastName; else checknull">{{item.TblContact.LastName}}</td>
+      <td *ngIf=" item.TblContact &&item.TblContact.Company; else checknull">{{item.TblContact.Company}}</td>
+      <td *ngIf="item.TblContact &&item.TblContact.StatusCode; else checknull">
         <tr *ngFor="let result of listStatusCode">
-          <td *ngIf="item.TblContact.MailStatusCode === result.StatusCode">{{result.Status}}</td>
+          <td *ngIf="item.TblContact.StatusCode == result.StatusCode">{{result.Status}}</td>
         </tr>
       </td>
+      <td *ngIf="item.UpdatedById; else checknull">{{item.UpdatedById}}</td>
+      <td *ngIf="item.UpdatedDate; else checknull">{{item.UpdatedDate}}</td>
     </tr>
   </table>
 </div>
+
+<ng-template #checknull>
+  <td></td>
+</ng-template>

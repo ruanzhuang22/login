@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app.routing';
 import { HttpClientModule } from '@angular/common/http';
 import { FilterComponent } from './components/filter/filter.component';
 import { NoteComponent } from './components/note/note.component';
+import { CustomDateComponent } from './components/custom-filter/custom-date/custom-date.component';
 
 @NgModule({  
   imports: [
